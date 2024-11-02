@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  leaf-db:
+    image: mysql:8.0
+    container_name: leaf_db
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: leaf
+      MYSQL_USER: yamamoto
+      MYSQL_PASSWORD: secret
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql:/var/lib/mysql
+
+  leaf-php:
+    build:
+      context: ./docker/php
+      dockerfile: Dockerfile
+    container_name: leaf_php
+    volumes:
+      - ./src/php:/var/www/src/php
+      - ./docker/php/php.ini:/usr/local/etc/php/php.ini
+    ports:
+      - "8000:8000"
+    depends_on:
+      - leaf-db
+
+  leaf-nginx:
+    image: nginx:latest
+    container_name: leaf_nginx
+    ports:
+      - "80:80" #Python API Interface (.html)
+      - "443:443"  # HTTPS port
+    volumes:
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf  # nginxの設定ファイル
+      - ./src/php:/var/www/src/php  # PHPファイルが置かれる場所
+    depends_on:
+      - leaf-php
+
+volumes:
+  mysql:
