@@ -38,6 +38,5 @@ services:
       - ./src/php:/var/www/src/php  # PHPファイルが置かれる場所
     depends_on:
       - leaf-php
-
 volumes:
   mysql:
