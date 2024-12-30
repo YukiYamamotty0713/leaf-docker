@@ -33,7 +33,7 @@ services:
     ports:
       - "80:80" #Python API Interface (.html)
     volumes:
-      - ./docker/nginx/nginx.conf:/etc/nginx/default.conf  # nginxの設定ファイル
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf  # の設定ファイル
       - ./src/php:/var/www/src/php  # PHPファイルが置かれる場所
     depends_on:
       - leaf-php
