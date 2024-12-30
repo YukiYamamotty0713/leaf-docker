@@ -32,7 +32,6 @@ services:
     container_name: leaf_nginx
     ports:
       - "80:80" #Python API Interface (.html)
-      - "443:443"  # HTTPS port
     volumes:
       - ./docker/nginx/nginx.conf:/etc/nginx/default.conf  # nginxの設定ファイル
       - ./src/php:/var/www/src/php  # PHPファイルが置かれる場所
