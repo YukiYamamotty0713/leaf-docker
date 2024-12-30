@@ -20,7 +20,7 @@ services:
       dockerfile: Dockerfile
     container_name: leaf_php
     volumes:
-      - ./src/php:/var/www/src/php
+      - ./src/php:/var/www/src/php/
       - ./docker/php/php.ini:/usr/local/etc/php/php.ini
     ports:
       - "8000:8000"
@@ -34,7 +34,7 @@ services:
       - "80:80" #Python API Interface (.html)
       - "443:443"  # HTTPS port
     volumes:
-      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf  # nginxの設定ファイル
+      - ./docker/nginx/nginx.conf:/etc/nginx/default.conf  # nginxの設定ファイル
       - ./src/php:/var/www/src/php  # PHPファイルが置かれる場所
     depends_on:
       - leaf-php
