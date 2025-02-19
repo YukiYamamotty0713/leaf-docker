@@ -37,5 +37,16 @@ services:
       - ./src/php:/var/www/src/php  # PHPファイルが置かれる場所
     depends_on:
       - leaf-php
+
+  redis:
+    image: "redis:alpine"
+    container_name: leaf_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+
 volumes:
   mysql:
+  redis-data:
+    driver: local
