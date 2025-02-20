@@ -31,9 +31,10 @@ RUN set -eux; \
     ; \
     php --version
 
-	
-#RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
 RUN apk add nodejs npm git
 
+# Heroku CLIのインストールに必要な依存関係とCLIのインストール
+RUN apk add --no-cache bash curl && \
+    curl https://cli-assets.heroku.com/install.sh | sh
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
