@@ -1,53 +1,60 @@
-## 概要
+###概要
+こちらは英単語学習アプリ「Leaf」の環境構築リポジトリです。  
+Leafはシンプルながらも機能豊富な設計を採用し、効率的かつ効果的な英単語学習をサポートします。最新のWeb技術とデザイン原則を取り入れることで、直感的な操作性と高いパフォーマンスを両立しています。
 
-英単語学習アプリ<br><br>
-スクリーンショット1
-![LeafCapture](src/img/LeafCapture.png)<br><br>
-スクリーンショット2
-![LeafCapture2](src/img/LeafCapture2.png)<br><br>
-スクリーンショット3
-![LeafCapture2](src/img/LeafCapture3.png)<br><br>
+**webサーバー：** Nginx
 
-## フレームワーク/言語
+###使用している技術
+- **バックエンド：** Laravel  
+- **フロントエンド：** Vue、Typescript、TailwindCSS  
+- **データベース：** MySQL  
+- **外部API：** GeminiAPI
 
-Backend:Laravel/Inertia<br>
-Frontend:Vue/TypeScript/TailwindCSS<br>
+### 環境構築手順
+1. **リポジトリのクローン**  
+   Gitを使用してリポジトリをクローンしてください。  
+   ```bash
+   git clone https://github.com/YukiYamamotty0713/leaf-docker .
+   ```
 
-## テスト
-PHPUnit
+2. **依存関係のインストール**  
+   - **バックエンド（Laravel）の依存関係のインストール：**  
+     ```bash
+     composer install
+     ```  
+   - **フロントエンドの依存関係のインストール：**  
+     ```bash
+     npm install
+     ```
 
-## 開発環境
-WSL/DockerCompose/Apline
+3. **環境変数の設定**  
+   プロジェクトルートにある `.env.example` ファイルをコピーして `.env` ファイルを作成し、必要な設定値（データベース接続情報、APIキーなど）を記入してください。  
+   ```bash
+   cp .env.example .env
+   ```  
+   その後、Laravelアプリケーションキーを生成します:  
+   ```bash
+   php artisan key:generate
+   ```
 
-## Webサーバー
-Nginx
+4. **Dockerによる環境構築（オプション）**  
+   Docker環境を利用する場合、以下のコマンドでコンテナを起動してください:  
+   ```bash
+   docker-compose up -d
+   ```
 
-## データベース
-MySQL
+5. **アプリケーションの起動**  
+   - **ローカルサーバーでの起動（Laravelの場合）：**  
+     ```bash
+     php artisan serve
+     ```  
+   - **Docker環境の場合：**  
+     設定されたポートでアクセス可能になります。
 
-## キャッシュサーバー
-Redis
+6. **テストの実行**  
+   環境構築が正しく行われたか確認するため、ユニットテストと統合テストを実行します:  
+   ```bash
+   php artisan test
+   ```
 
-##　デプロイ環境
-Heroku 
-
-## セットアップ手順
-
-1:gitをインストール済み前提<br>
-git clone https://github.com/YukiYamamotty0713/leaf-docker .
-
-2:(Docker Desktop導入済み)<br>
-docker-compose upを実行
-コンテナの中でアプリソースをclone
-(var/www/srcにて) git clone https://github.com/YukiYamamotty0713/leaf-app . を実行
-
-3:サーバー側ライブラリ同期<br>
-composer update
-
-4:フロント側ライブラリ同期 およびビルド<br>
-npm install & npm run build
-
-5:ホットリロードモード:<br>
-npm run dev
-
-
+問題や疑問が発生した場合は、Issueトラッカーにて申し立ていただけると幸いです
